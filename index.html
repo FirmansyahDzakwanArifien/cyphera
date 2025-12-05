@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="My Portfolio">
+    <meta name="author" content="Nama Anda">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline';">
+    <title>Cyphera</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #000000;
+            --secondary-black: #1a1a1a;
+            --gray-dark: #2d2d2d;
+            --gray-medium: #666666;
+            --gray-light: #e0e0e0;
+            --white: #ffffff;
+            --accent: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.8;
+            color: var(--secondary-black);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-black);
+            color: var(--white);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
+            animation: shine 8s infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .profile-section {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-initial {
+            width: 120px;
+            height: 120px;
+            border: 3px solid var(--white);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            background-color: var(--secondary-black);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-initial:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            font-family: 'Arial', sans-serif;
+        }
+
+        nav {
+            background-color: var(--secondary-black);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li {
+            margin: 0;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 20px 30px;
+            display: block;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--gray-dark);
+        }
+
+        section {
+            padding: 80px 20px;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--accent);
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-black);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1em;
+            line-height: 2;
+            color: var(--gray-dark);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--white);
+            border: 1px solid var(--gray-light);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: var(--primary-black);
+        }
+
+        .skill-icon {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .skill-item h3 {
+            font-size: 1.3em;
+            font-weight: 400;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .skill-item p {
+            color: var(--gray-medium);
+            font-family: 'Arial', sans-serif;
+            font-size: 0.95em;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background-color: var(--white);
+            border: 1px solid var(--gray-light);
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-black);
+            transition: left 0.4s ease;
+        }
+
+        .project-card:hover::before {
+            left: 0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .project-number {
+            font-size: 3em;
+            font-weight: 300;
+            color: var(--gray-light);
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            font-size: 1.5em;
+            font-weight: 400;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .project-card p {
+            color: var(--gray-medium);
+            line-height: 1.8;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .contact-section {
+            background-color: var(--primary-black);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .contact-section .section-title {
+            color: var(--white);
+        }
+
+        .contact-section .section-title::after {
+            background-color: var(--white);
+        }
+
+        .contact-text {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .contact-btn {
+            color: var(--white);
+            text-decoration: none;
+            padding: 15px 40px;
+            border: 2px solid var(--white);
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .contact-btn:hover {
+            background-color: var(--white);
+            color: var(--primary-black);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--secondary-black);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+
+            .nav-links a {
+                padding: 15px;
+                text-align: center;
+            }
+
+            .projects-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="profile-section">
+            <div class="profile-initial">FDA</div>
+            <h1>Firmansyah Dzakwan Arifien</h1>
+            <p class="subtitle">Enthusiastic, Sincere and Confident</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">About Me</h2>
+            <div class="about-content fade-in">
+                <p>
+                    I am an Informatics Engineering student at STT Terpadu Nurul Fikri with a strong interest in cybersecurity, software development, and system security. My academic and personal journey is focused on understanding how technology can be built, maintained, and protected in an increasingly connected world.
+
+                    I actively explore topics related to cybersecurity, programming, and secure system design, while also contributing to campus initiatives that support collaboration and growth in these areas. Currently, I serve as the leader of the Nurul Fikri Student Cybersecurity Community (NFSCC) for the 2025 period, where I help coordinate activities that promote cybersecurity awareness and skill development among fellow students.
+                </p>
+                <p style="margin-top: 20px;">
+                    With a thoughtful and growth-oriented mindset, I am always open to meaningful connections, professional collaboration, and continuous learning in the evolving world of technology.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title fade-in">Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-item fade-in">
+                    <div class="skill-icon">🛡️</div>
+                    <h3>Cyber Security</h3>
+                    <p>VAPT, Security Analyst, Cybersecurity Enthusiast</p>
+                </div>
+                <div class="skill-item fade-in">
+                    <div class="skill-icon">📟</div>
+                    <h3>Sysadmin</h3>
+                    <p>Node.js, Python, PHP, REST APIs</p>
+                </div>
+                <div class="skill-item fade-in">
+                    <div class="skill-icon">🐳</div>
+                    <h3>DevOps</h3>
+                    <p>Docker, Git, CI/CD, Cloud Services</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section id="projects">
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-number">01</div>
+                    <h3>E-Commerce Platform</h3>
+                    <p>
+                        Platform e-commerce modern dengan sistem pembayaran terintegrasi, 
+                        manajemen inventory real-time, dan analytics dashboard yang comprehensive.
+                    </p>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-number">02</div>
+                    <h3>Mobile Application</h3>
+                    <p>
+                        Aplikasi mobile cross-platform untuk task management dengan fitur 
+                        sinkronisasi cloud, notifikasi real-time, dan offline support.
+                    </p>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-number">03</div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>
+                        Dashboard interaktif untuk visualisasi data bisnis dengan chart dinamis, 
+                        filter advanced, dan export report ke berbagai format.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Get In Touch</h2>
+            <p class="contact-text fade-in">
+                Tertarik untuk berkolaborasi atau memiliki project yang menarik? 
+                Mari kita diskusikan dan wujudkan ide Anda.
+            </p>
+            <div class="contact-links fade-in">
+                <a href="mailto:fdzak01@gmail.com" class="contact-btn" rel="noopener noreferrer">Email</a>
+                <a href="https://github.com/firmansyahdzakwanarifien" class="contact-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/firmansyah-dzakwan-arifien-90b1b8293/" class="contact-btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025</p>
+    </footer>
+
+    <script>
+        (function() {
+            'use strict';
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(function(el) {
+                observer.observe(el);
+            });
+
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const navHeight = document.querySelector('nav').offsetHeight;
+                        const targetPosition = targetSection.offsetTop - navHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            const externalLinks = document.querySelectorAll('a[target="_blank"]');
+            externalLinks.forEach(function(link) {
+                if (!link.hasAttribute('rel')) {
+                    link.setAttribute('rel', 'noopener noreferrer');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
